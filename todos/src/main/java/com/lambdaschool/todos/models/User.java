@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The entity allowing interaction with the users table
@@ -44,6 +46,10 @@ public class User extends Auditable
     @Email
     private String primaryemail;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "user")
+    private Set<Todo> Todos = new HashSet<>();
+
     /**
      * Default constructor used primarily by the JPA.
      */
@@ -68,6 +74,16 @@ public class User extends Auditable
         setUsername(username);
         setPassword(password);
         this.primaryemail = primaryemail;
+    }
+
+    public Set<Todo> getTodos()
+    {
+        return Todos;
+    }
+
+    public void setTodos(Set<Todo> todos)
+    {
+        Todos = todos;
     }
 
     /**
