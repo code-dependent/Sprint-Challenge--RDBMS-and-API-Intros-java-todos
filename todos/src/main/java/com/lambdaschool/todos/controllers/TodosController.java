@@ -20,7 +20,7 @@ public class TodosController
      * Using the Todos service to process user, todos combinations data
      */
     @Autowired
-    TodosService todosService;
+    private TodosService todosService;
 
     /**
      * Given the todo id, mark the task as complete
